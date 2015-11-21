@@ -27,12 +27,11 @@ class Game(object):
                                   x=randint(100, 500), 
                                   y=randint(100, 500), 
                                   batch=self.batch,
-                                  group=self.foreground))
+                                  group=self.foreground)
                                   
             self.add_entity(e)
             self.add_entity(e.text)
         self.bg = window_dressing.Background(img=resources.bg, x=0, y=0, batch=self.batch, group=self.background)
-                                  batch=self.batch)
 
         self.label_text = "The rag and bone man did not come today..."
         self.label_visible = True
