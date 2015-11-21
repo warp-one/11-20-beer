@@ -2,7 +2,7 @@ from random import randint
 
 import pyglet
 
-import player, resources
+import player, resources, window_dressing
 from enemy import Enemy
 
 class Game(object):
@@ -11,18 +11,25 @@ class Game(object):
 
     def __init__(self):
     	from text import GameText # FIXME: the suck
+        self.entities = []
+        self.background = pyglet.graphics.OrderedGroup(0)
+        self.foreground = pyglet.graphics.OrderedGroup(1)
+        
         self.window = pyglet.window.Window(width=800, height=600)
         self.batch = pyglet.graphics.Batch()
-        self.player = player.Player(img=resources.player, x=50, y=50, batch=self.batch)
-        self.window.push_handlers(self.player)
+        self.player = player.Player(img=resources.player, x=50, y=50, batch=self.batch, group=self.foreground)
+        self.add_entity(self.player)
+        self.window.push_handlers(self.player.key_handler)
         self.window.push_handlers(self.on_draw)
         self.window.push_handlers(self.on_key_press)
-        self.entities = []
         for _ in range(3):
             self.add_entity(Enemy(img=resources.enemy, 
                                   x=randint(100, 500), 
                                   y=randint(100, 500), 
-                                  batch=self.batch))
+                                  batch=self.batch,
+                                  group=self.foreground))
+                                  
+        self.bg = window_dressing.Background(img=resources.bg, x=0, y=0, batch=self.batch, group=self.background)
 
         self.label_text = "The rag and bone man did not come today..."
         self.label_visible = True
