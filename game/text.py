@@ -13,9 +13,10 @@ class GameText(pyglet.text.Label):
             anchor_y=kwargs.pop('anchor_y', 'center'),
             x=w//2,
             y=h//2,
-            font_name="monospace",
+            font_name="Times New Roman",
             **kwargs
         )
+        print text, w, h, kwargs
 
 class EnemyText(GameText):
 
@@ -33,7 +34,7 @@ class EnemyText(GameText):
     def __init__(self, enemy):
         t = self.get_text()
         super(EnemyText, self).__init__(text=t, w=enemy.x, h=enemy.y, 
-            anchor_x="left", anchor_y="top", batch=enemy.batch, color=(100,100,100,255))
+            anchor_x="left", anchor_y="top", batch=enemy.batch, color=(100,100,100,255), group=enemy.group)
 
     def get_text(self):
         return random.choice(self.TEXTS)
