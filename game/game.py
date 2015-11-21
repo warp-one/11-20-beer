@@ -44,20 +44,16 @@ class Game(object):
         
         pyglet.clock.schedule_interval(self.update, self.framerate)
 
-        self.c = 100
 
     def on_key_press(self, symbols, modifiers):
         if self.label_visible:
             self.label_visible=False
-        if not self.label_visible:
             for e in self.entities:
                 if isinstance(e, Enemy):
-                    print self.c
-                    e.text.color = (self.c,self.c,self.c,255)
+                    e.text.color = (180,180,180,255)
         
         
     def on_draw(self):
-        self.c+=50
         self.window.clear()
         self.batch.draw()
         if self.label_visible:
