@@ -29,7 +29,7 @@ class Game(object):
         self.window.push_handlers(self.on_draw)
         self.window.push_handlers(self.on_key_press)
         for _ in range(3):
-            e = Enemy(img=resources.enemy, 
+            e = Enemy(self, img=resources.enemy, 
                                   x=randint(100, 500), 
                                   y=randint(100, 500), 
                                   batch=self.batch,
@@ -65,6 +65,8 @@ class Game(object):
             self.enemies.append(entity)
         
     def update(self, dt):
+        shift = True
+    
         for e in self.entities:
             if hasattr(e, 'update'):
                 e.update(dt)
@@ -73,6 +75,14 @@ class Game(object):
             if get_distance(n, self.player) < 50 and not n.interacted:
                 n.interact()
                 self.player.advance_image()
+                
+            if not n.interacted:
+                shift = False
+                
+        if shift:
+            for n in self.enemies:
+                n.shift()
+          
         
     def execute(self):
         pyglet.app.run()
