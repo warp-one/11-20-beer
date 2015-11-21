@@ -32,6 +32,19 @@ class Enemy(unit.Unit):
         dy = randint(-self.step, self.step) + y_dif
         self.move(dx, dy)
         
+    def get_face(self):
+        x_dif = self.x - self.game.player.x
+        y_dif = self.y - self.game.player.y
+        if abs(x_dif) > abs(y_dif):
+            if x_dif > 0:
+                return resources.enemyhl
+            else:
+                return resources.enemyhr
+        else:
+            if y_dif > 0:
+                return resources.enemyhd
+            else:
+                return resources.enemyhu
         
     def update(self, dt):
         if self.frozen:
@@ -41,6 +54,7 @@ class Enemy(unit.Unit):
             self.current_state()
             self.text.x = self.x
             self.text.y = self.y
+            self.image = self.get_face()
             if self.interacted:
                 self.text.text_update()
         
