@@ -11,6 +11,7 @@ class Enemy(pyglet.sprite.Sprite):
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
         self.text = EnemyText(self)
+        self.text.color = (0,0,0,0)
         self.interacted = False
         
     def update(self, dt):

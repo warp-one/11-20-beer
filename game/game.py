@@ -34,9 +34,8 @@ class Game(object):
                                   y=randint(100, 500), 
                                   batch=self.batch,
                                   group=self.foreground)
-                                  
-            self.add_entity(e)
             self.add_entity(e.text)
+            self.add_entity(e)
         self.bg = window_dressing.Background(img=resources.bg, x=0, y=0, batch=self.batch, group=self.background)
 
         self.label_text = "The rag and bone man did not come today..."
@@ -45,12 +44,20 @@ class Game(object):
         
         pyglet.clock.schedule_interval(self.update, self.framerate)
 
+        self.c = 100
+
     def on_key_press(self, symbols, modifiers):
-    	if self.label_visible:
-    		self.label_visible=False
+        if self.label_visible:
+            self.label_visible=False
+        if not self.label_visible:
+            for e in self.entities:
+                if isinstance(e, Enemy):
+                    print self.c
+                    e.text.color = (self.c,self.c,self.c,255)
         
         
     def on_draw(self):
+        self.c+=50
         self.window.clear()
         self.batch.draw()
         if self.label_visible:
