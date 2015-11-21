@@ -17,3 +17,4 @@ def uncenter_image(image):
 # IMAGES
 player = pyglet.resource.image("player.png")
 enemy = pyglet.resource.image("enemy.png")
+bg = pyglet.resource.image("bg.png")
