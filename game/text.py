@@ -33,6 +33,7 @@ class EnemyText(GameText):
 
     def __init__(self, enemy):
         t = self.get_text()
+        self.c=180
         super(EnemyText, self).__init__(text=t, w=enemy.x, h=enemy.y, 
             anchor_x="left", anchor_y="top", batch=enemy.batch, color=(100,100,100,255), group=enemy.group)
 
@@ -41,3 +42,6 @@ class EnemyText(GameText):
 
     def text_update(self):
         self.text=self.get_text()
+        self.c+= 50
+        if self.c > 255: self.c= 0
+        self.color=map(abs,(self.c,self.c-50,self.c+50,255))
