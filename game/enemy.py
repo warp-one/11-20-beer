@@ -19,6 +19,8 @@ class Enemy(pyglet.sprite.Sprite):
         self.y += randint(-self.step, self.step)
         self.text.x = self.x
         self.text.y = self.y
+        if self.interacted:
+        	self.text.text_update()
         
     def interact(self):
         self.interacted = True
