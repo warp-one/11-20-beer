@@ -11,6 +11,7 @@ class Game(object):
         self.window.push_handlers(self.on_draw)
         
     def on_draw(self):
+        self.window.clear()
         self.batch.draw()
         
     def execute(self):
