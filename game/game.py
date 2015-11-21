@@ -23,13 +23,16 @@ class Game(object):
         self.window.push_handlers(self.on_draw)
         self.window.push_handlers(self.on_key_press)
         for _ in range(3):
-            self.add_entity(Enemy(img=resources.enemy, 
+            e = Enemy(img=resources.enemy, 
                                   x=randint(100, 500), 
                                   y=randint(100, 500), 
                                   batch=self.batch,
                                   group=self.foreground))
                                   
+            self.add_entity(e)
+            self.add_entity(e.text)
         self.bg = window_dressing.Background(img=resources.bg, x=0, y=0, batch=self.batch, group=self.background)
+                                  batch=self.batch)
 
         self.label_text = "The rag and bone man did not come today..."
         self.label_visible = True
@@ -53,7 +56,8 @@ class Game(object):
         
     def update(self, dt):
         for e in self.entities:
-            e.update(dt)
+            if hasattr(e, 'update'):
+                e.update(dt)
         
     def execute(self):
         pyglet.app.run()
