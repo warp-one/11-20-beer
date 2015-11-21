@@ -1,6 +1,6 @@
 import pyglet
 
-class 
+import player
 
 class Game(object):
     def __init__(self):
