@@ -19,6 +19,8 @@ class Game(object):
 
         self.label_text = "The rag and bone man did not come today..."
         self.label_visible = True
+        
+        pyglet.clock.schedule_interval(self.update, self.framerate)
 
     def on_key_press(self, symbols, modifiers):
     	if self.label_visible:
@@ -30,8 +32,6 @@ class Game(object):
                                   x=randint(100, 500), 
                                   y=randint(100, 500), 
                                   batch=self.batch))
-        
-        pyglet.clock.schedule_interval(self.update, self.framerate)
         
     def on_draw(self):
     	from text import GameText # FIXME: the suck
