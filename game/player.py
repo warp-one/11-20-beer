@@ -10,6 +10,8 @@ class Player(unit.Unit):
     step = 5
     images = resources.players
 
+    health = 500
+
     def __init__(self, *args, **kwargs):
         self.game=kwargs.pop('game')
         super(Player, self).__init__(*args, **kwargs)
@@ -32,6 +34,8 @@ class Player(unit.Unit):
                 
         self.move(dx, dy)
         
+        for e in self.get_colliding_baddies():
+            self.health -= 1
         
     def advance_image(self):
         self.current_image += 1

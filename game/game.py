@@ -42,6 +42,8 @@ class Game(object):
         self.label_visible = True
         self.label = GameText(self.label_text, self.window.width, self.window.height)
         
+        self.hud = GameText(str(self.player.health), 50, 1150, batch=self.batch, group=self.foreground)
+
         pyglet.clock.schedule_interval(self.update, self.framerate)
 
 
@@ -82,6 +84,11 @@ class Game(object):
         if shift:
             for n in self.enemies:
                 n.shift()
+
+        if self.player.health < 1:
+            raise Exception("ded")
+        else:
+            self.hud.text=str(self.player.health)
           
         
     def execute(self):
