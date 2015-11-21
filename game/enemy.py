@@ -3,6 +3,7 @@ from random import randint
 import pyglet
 
 from text import EnemyText
+import resources
 
 class Enemy(pyglet.sprite.Sprite):
 
@@ -22,3 +23,4 @@ class Enemy(pyglet.sprite.Sprite):
         
     def interact(self):
         self.interacted = True
+        self.image = resources.enemy1

@@ -20,4 +20,5 @@ players = [pyglet.resource.image("player.png"),
            pyglet.resource.image("player2.png"),
            pyglet.resource.image("player3.png")]
 enemy = pyglet.resource.image("enemy.png")
+enemy1 = pyglet.resource.image("enemy1.png")
 bg = pyglet.resource.image("bg.png")
