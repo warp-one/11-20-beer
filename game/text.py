@@ -38,3 +38,6 @@ class EnemyText(GameText):
 
     def get_text(self):
         return random.choice(self.TEXTS)
+
+    def text_update(self):
+        self.text=self.get_text()
