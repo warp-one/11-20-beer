@@ -8,14 +8,15 @@ class Player(pyglet.sprite.Sprite):
 
     def __init__(self, *args, **kwargs):
         super(Player, self).__init__(*args, **kwargs)
+        self.key_handler = key.KeyStateHandler()
         
-    def on_key_press(self, symbol, modifiers):
-        if symbol == key.UP:
+    def update(self, dt):
+        if self.key_handler[key.UP]:
             self.y += self.step
-        if symbol == key.DOWN:
+        if self.key_handler[key.DOWN]:
             self.y -= self.step
-        if symbol == key.LEFT:
+        if self.key_handler[key.LEFT]:
             self.x -= self.step
-        if symbol == key.RIGHT:
+        if self.key_handler[key.RIGHT]:
             self.x += self.step
         
