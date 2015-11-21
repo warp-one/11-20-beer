@@ -19,10 +19,12 @@ class Game(object):
         self.window.push_handlers(self.on_key_press)
         self.entities = []
         for _ in range(3):
-            self.add_entity(Enemy(img=resources.enemy, 
+            e = Enemy(img=resources.enemy, 
                                   x=randint(100, 500), 
                                   y=randint(100, 500), 
-                                  batch=self.batch))
+                                  batch=self.batch)
+            self.add_entity(e)
+            self.add_entity(e.text)
 
         self.label_text = "The rag and bone man did not come today..."
         self.label_visible = True
@@ -46,7 +48,8 @@ class Game(object):
         
     def update(self, dt):
         for e in self.entities:
-            e.update(dt)
+            if hasattr(e, 'update'):
+                e.update(dt)
         
     def execute(self):
         pyglet.app.run()
