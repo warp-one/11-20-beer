@@ -2,7 +2,7 @@ import pyglet
 from pyglet.window import key
 
 
-class Player(pyglet.sprite.Sprite0):
+class Player(pyglet.sprite.Sprite):
 
     step = 5
 
