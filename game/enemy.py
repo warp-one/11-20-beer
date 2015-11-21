@@ -16,6 +16,8 @@ class Enemy(pyglet.sprite.Sprite):
         self.text.color = (0,0,0,0)
         self.interacted = False
         self.current_state = self.skitter
+
+        self.frozen = 0
         
     def skitter(self):
         self.x += randint(-self.step, self.step)
@@ -29,11 +31,14 @@ class Enemy(pyglet.sprite.Sprite):
         
         
     def update(self, dt):
-        self.current_state()
-        self.text.x = self.x
-        self.text.y = self.y
-        if self.interacted:
-        	self.text.text_update()
+        if self.frozen:
+            self.frozen -= 1
+        else:
+            self.current_state()
+            self.text.x = self.x
+            self.text.y = self.y
+            if self.interacted:
+                self.text.text_update()
         
     def interact(self):
         self.interacted = True
@@ -41,4 +46,7 @@ class Enemy(pyglet.sprite.Sprite):
         
     def shift(self):
         self.current_state = self.chase
+
+    def freeze(self, n):
+        self.frozen=n
         
