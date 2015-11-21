@@ -25,6 +25,7 @@ class Enemy(unit.Unit):
         self.move(dx, dy)
         
     def chase(self):
+        self.image = resources.enemy1
         x_dif = (-3 if self.x > self.game.player.x else 3)
         y_dif = (-3 if self.y > self.game.player.y else 3)
         dx = randint(-self.step, self.step) + x_dif
@@ -35,6 +36,7 @@ class Enemy(unit.Unit):
     def update(self, dt):
         if self.frozen:
             self.frozen -= 1
+            self.image = resources.enemy
         else:
             self.current_state()
             self.text.x = self.x
