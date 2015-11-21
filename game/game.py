@@ -1,9 +1,14 @@
+from math import sqrt
+
 from random import randint
 
 import pyglet
 
 import player, resources, window_dressing
 from enemy import Enemy
+
+def get_distance(o1, o2):
+    return sqrt((o2.x - o1.x)**2 + (o2.y - o1.y)**2)
 
 class Game(object):
 
@@ -12,12 +17,13 @@ class Game(object):
     def __init__(self):
     	from text import GameText # FIXME: the suck
         self.entities = []
+        self.enemies = []
         self.background = pyglet.graphics.OrderedGroup(0)
         self.foreground = pyglet.graphics.OrderedGroup(1)
         
         self.window = pyglet.window.Window(width=800, height=600)
         self.batch = pyglet.graphics.Batch()
-        self.player = player.Player(img=resources.player, x=50, y=50, batch=self.batch, group=self.foreground)
+        self.player = player.Player(img=resources.players[0], x=50, y=50, batch=self.batch, group=self.foreground)
         self.add_entity(self.player)
         self.window.push_handlers(self.player.key_handler)
         self.window.push_handlers(self.on_draw)
@@ -52,11 +58,18 @@ class Game(object):
         
     def add_entity(self, entity):
         self.entities.append(entity)
+        if isinstance(entity, Enemy):
+            self.enemies.append(entity)
         
     def update(self, dt):
         for e in self.entities:
             if hasattr(e, 'update'):
                 e.update(dt)
+                
+        for n in self.enemies:
+            if get_distance(n, self.player) < 50 and not n.interacted:
+                n.interact()
+                self.player.advance_image()
         
     def execute(self):
         pyglet.app.run()
