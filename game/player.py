@@ -28,3 +28,4 @@ class Player(pyglet.sprite.Sprite):
         if self.current_image >= len(self.images):
             self.current_image = 0
         self.image = self.images[self.current_image]
+       
