@@ -10,6 +10,8 @@ class Player(pyglet.sprite.Sprite):
     step = 5
     images = resources.players
 
+    health = 500
+
     def __init__(self, *args, **kwargs):
         self.game=kwargs.pop('game')
         super(Player, self).__init__(*args, **kwargs)
@@ -28,6 +30,8 @@ class Player(pyglet.sprite.Sprite):
         if self.key_handler[key.SPACE]:
             for e in self.get_colliding_baddies():
                 e.freeze(100)
+        for e in self.get_colliding_baddies():
+            self.health -= 1
         
     def advance_image(self):
         self.current_image += 1
