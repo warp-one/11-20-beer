@@ -1,11 +1,11 @@
 import pyglet
 from pyglet.window import key
 
-import resources
+import resources, unit
 
 from enemy import Enemy
 
-class Player(pyglet.sprite.Sprite):
+class Player(unit.Unit):
 
     step = 5
     images = resources.players
@@ -17,17 +17,21 @@ class Player(pyglet.sprite.Sprite):
         self.current_image = 0
         
     def update(self, dt):
+        dx, dy = 0, 0
         if self.key_handler[key.UP]:
-            self.y += self.step
+            dy = self.step
         if self.key_handler[key.DOWN]:
-            self.y -= self.step
+            dy = -self.step
         if self.key_handler[key.LEFT]:
-            self.x -= self.step
+            dx = -self.step
         if self.key_handler[key.RIGHT]:
-            self.x += self.step
+            dx = self.step
         if self.key_handler[key.SPACE]:
             for e in self.get_colliding_baddies():
                 e.freeze(100)
+                
+        self.move(dx, dy)
+        
         
     def advance_image(self):
         self.current_image += 1

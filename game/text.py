@@ -16,7 +16,6 @@ class GameText(pyglet.text.Label):
             font_name="Times New Roman",
             **kwargs
         )
-        print text, w, h, kwargs
 
 class EnemyText(GameText):
 

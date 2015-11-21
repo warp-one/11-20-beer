@@ -3,9 +3,9 @@ from random import randint
 import pyglet
 
 from text import EnemyText
-import resources
+import resources, unit
 
-class Enemy(pyglet.sprite.Sprite):
+class Enemy(unit.Unit):
 
     step = 5
 
@@ -20,14 +20,16 @@ class Enemy(pyglet.sprite.Sprite):
         self.frozen = 0
         
     def skitter(self):
-        self.x += randint(-self.step, self.step)
-        self.y += randint(-self.step, self.step)
+        dx = randint(-self.step, self.step)
+        dy = randint(-self.step, self.step)
+        self.move(dx, dy)
         
     def chase(self):
         x_dif = (-3 if self.x > self.game.player.x else 3)
         y_dif = (-3 if self.y > self.game.player.y else 3)
-        self.x += randint(-self.step, self.step) + x_dif
-        self.y += randint(-self.step, self.step) + y_dif
+        dx = randint(-self.step, self.step) + x_dif
+        dy = randint(-self.step, self.step) + y_dif
+        self.move(dx, dy)
         
         
     def update(self, dt):
