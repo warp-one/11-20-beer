@@ -23,7 +23,7 @@ class Game(object):
         
         self.window = pyglet.window.Window(width=800, height=600)
         self.batch = pyglet.graphics.Batch()
-        self.player = player.Player(img=resources.players[0], x=50, y=50, batch=self.batch, group=self.foreground)
+        self.player = player.Player(img=resources.players[0], x=50, y=50, batch=self.batch, group=self.foreground, game=self)
         self.add_entity(self.player)
         self.window.push_handlers(self.player.key_handler)
         self.window.push_handlers(self.on_draw)
