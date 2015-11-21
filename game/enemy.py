@@ -24,6 +24,7 @@ class Enemy(pyglet.sprite.Sprite):
         self.y += randint(-self.step, self.step)
         
     def chase(self):
+        self.image = resources.enemy1
         x_dif = (-3 if self.x > self.game.player.x else 3)
         y_dif = (-3 if self.y > self.game.player.y else 3)
         self.x += randint(-self.step, self.step) + x_dif
@@ -33,6 +34,7 @@ class Enemy(pyglet.sprite.Sprite):
     def update(self, dt):
         if self.frozen:
             self.frozen -= 1
+            self.image = resources.enemy
         else:
             self.current_state()
             self.text.x = self.x
