@@ -35,7 +35,8 @@ class Player(unit.Unit):
         self.move(dx, dy)
         
         for e in self.get_colliding_baddies():
-            self.health -= 1
+            if not e.frozen and e.current_state == e.chase:
+                self.health -= 1
         
     def advance_image(self):
         self.current_image += 1
